@@ -1,0 +1,153 @@
+<div class="admin-container">
+  <!-- Header -->
+  <div class="admin-header">
+    <h1>Administrators</h1>
+    <button class="add-btn" (click)="openAddEditModal(null)">
+      <i class="fas fa-plus"></i> Add Administrator
+    </button>
+  </div>
+
+  <!-- Search and Filter -->
+  <div class="search-filter-bar">
+    <div class="search-bar">
+      <input
+        type="text"
+        placeholder="Search administrators..."
+        [(ngModel)]="searchTerm"
+        (input)="filterAdmins()"
+        [ngClass]="{'light-theme': isLightTheme}"
+      />
+      <i class="fas fa-search search-icon"></i>
+    </div>
+    <div class="filter-bar">
+      <select [(ngModel)]="roleFilter" (change)="filterAdmins()">
+        <option value="">Filter by Role</option>
+        <option value="Super Admin">Super Admin</option>
+        <option value="Admin">Admin</option>
+        <option value="Moderator">Moderator</option>
+      </select>
+      <select [(ngModel)]="statusFilter" (change)="filterAdmins()">
+        <option value="">Filter by Status</option>
+        <option value="Active">Active</option>
+        <option value="Inactive">Inactive</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Administrators Table -->
+  <div class="table-wrapper">
+    <table class="admin-table" [ngClass]="{'light-theme': isLightTheme}">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Role</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let admin of paginatedAdmins; let i = index" [ngClass]="{'alternate-row': i % 2 === 0}">
+          <td>{{ admin.name }}</td>
+          <td>{{ admin.email }}</td>
+          <td>{{ admin.role }}</td>
+          <td>
+            <span class="status" [ngClass]="{'active': admin.status === 'Active'}">
+              {{ admin.status }}
+            </span>
+          </td>
+          <td>
+            <button class="action-btn edit-btn" (click)="openAddEditModal(admin)">
+              <i class="fas fa-edit"></i>
+            </button>
+            <button class="action-btn delete-btn" (click)="deleteAdmin(admin)">
+              <i class="fas fa-trash"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Pagination -->
+  <div class="pagination">
+    <button (click)="changePage(-1)" [disabled]="currentPage === 1">
+      <i class="fas fa-chevron-left"></i>
+    </button>
+    <span>Page {{ currentPage }} of {{ totalPages }}</span>
+    <button (click)="changePage(1)" [disabled]="currentPage === totalPages">
+      <i class="fas fa-chevron-right"></i>
+    </button>
+  </div>
+
+  <!-- Modal for Add/Edit Admin -->
+  <div class="modal" [ngClass]="{'show': showModal}">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>{{ selectedAdmin ? 'Edit Administrator' : 'Add Administrator' }}</h2>
+        <button class="close-btn" (click)="closeModal()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #adminForm="ngForm">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input
+              type="text"
+              id="name"
+              [(ngModel)]="modalAdmin.name"
+              name="name"
+              required
+              [ngClass]="{'light-theme': isLightTheme}"
+            />
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input
+              type="email"
+              id="email"
+              [(ngModel)]="modalAdmin.email"
+              name="email"
+              required
+              [ngClass]="{'light-theme': isLightTheme}"
+            />
+          </div>
+          <div class="form-group">
+            <label for="role">Role</label>
+            <select
+              id="role"
+              [(ngModel)]="modalAdmin.role"
+              name="role"
+              required
+              [ngClass]="{'light-theme': isLightTheme}"
+            >
+              <option value="Super Admin">Super Admin</option>
+              <option value="Admin">Admin</option>
+              <option value="Moderator">Moderator</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="status">Status</label>
+            <select
+              id="status"
+              [(ngModel)]="modalAdmin.status"
+              name="status"
+              required
+              [ngClass]="{'light-theme': isLightTheme}"
+            >
+              <option value="Active">Active</option>
+              <option value="Inactive">Inactive</option>
+            </select>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="cancel-btn" (click)="closeModal()">Cancel</button>
+        <button class="save-btn" (click)="saveAdmin()" [disabled]="!adminForm.valid">
+          Save
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
