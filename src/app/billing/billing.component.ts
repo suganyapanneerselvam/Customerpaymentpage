@@ -1,16 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+
 @Component({
   selector: 'app-billing',
   standalone: true,
-  imports: [CommonModule,FormsModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './billing.component.html',
-  styleUrl: './billing.component.css'
+  styleUrls: ['./billing.component.css']
 })
-
-
-
 export class BillingComponent {
   showPaymentForm: boolean = false;
   months: string[] = Array.from({ length: 12 }, (_, i) => (i + 1).toString().padStart(2, '0')); // ["01", "02", ..., "12"]
@@ -35,5 +33,9 @@ export class BillingComponent {
       });
       this.showPaymentForm = false;
     }
+  }
+
+  removePaymentMethod(index: number) {
+    this.paymentMethods.splice(index, 1);
   }
 }

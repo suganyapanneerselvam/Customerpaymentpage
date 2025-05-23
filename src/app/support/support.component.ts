@@ -1,12 +1,17 @@
-import { Component } from '@angular/core';
+
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-support',
-  standalone: true,
-  imports: [],
   templateUrl: './support.component.html',
-  styleUrl: './support.component.css'
+  styleUrls: ['./support.component.css']
 })
-export class SupportComponent {
+export class SupportComponent implements OnInit {
+  isLightTheme: boolean = false;
 
+  constructor() {}
+
+  ngOnInit(): void {
+    this.isLightTheme = document.querySelector('.app-container')?.classList.contains('light-theme') || false;
+  }
 }

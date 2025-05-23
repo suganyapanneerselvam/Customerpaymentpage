@@ -1,7 +1,5 @@
-
 /* Define theme variables */
 .app-container {
-  /* Default to dark theme */
   --background-color: #1a1f2e;
   --text-color: white;
   --secondary-text-color: #888;
@@ -11,7 +9,7 @@
   --input-background: #333;
   --input-border: #444;
   --table-header-background: #333;
-  overflow-x: hidden; /* Prevent horizontal overflow */
+  overflow-x: hidden;
 }
 
 .app-container.light-theme {
@@ -26,7 +24,6 @@
   --table-header-background: #e0e0e0;
 }
 
-/* Apply theme variables */
 .app-container {
   display: flex;
   flex-direction: column;
@@ -42,10 +39,10 @@
   padding: 20px;
   position: fixed;
   top: 0;
-  bottom: 0; /* Ensure sidebar doesn't overlap footer */
+  bottom: 0;
   border-right: 1px solid var(--border-color);
   overflow-y: auto;
-  transition: transform 0.3exact ease;
+  transition: transform 0.3s ease;
   z-index: 1000;
 }
 
@@ -125,32 +122,35 @@
   z-index: 1100;
 }
 
+/* Updated footer styles */
 .footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 5px 30px;
-  margin: 0;
+  padding: 10px 30px;
   background-color: var(--background-color);
   border-top: 1px solid var(--border-color);
   margin-left: 250px;
   width: calc(100% - 250px);
-  position: relative;
-  z-index: 500;
   box-sizing: border-box;
+  flex-wrap: wrap;
+  gap: 15px;
+  z-index: 999; /* Ensure footer is below sidebar but above other content */
 }
 
 .footer-left {
   display: flex;
   align-items: center;
-  gap: 12px;
-  flex-shrink: 0;
+  gap: 15px;
+  flex-shrink: 1;
+  min-width: 0;
 }
 
 .footer-left span {
   font-size: 14px;
   color: var(--secondary-text-color);
   line-height: 1;
+  white-space: nowrap;
 }
 
 .status {
@@ -159,7 +159,7 @@
 
 .social-icons {
   display: flex;
-  gap: 5px;
+  gap: 8px;
   align-items: center;
 }
 
@@ -176,6 +176,8 @@
   gap: 15px;
   flex-wrap: wrap;
   align-items: center;
+  flex-shrink: 1;
+  min-width: 0;
 }
 
 .footer-right a {
@@ -203,14 +205,15 @@
 
 /* Media Queries for Responsiveness */
 
-/* Large devices (min-width: 1200px) */
+/* Large screens (1200px and above, including 1920px) */
 @media (min-width: 1200px) {
   .footer {
-    padding: 5px 30px;
+    padding: 10px 40px;
+    gap: 20px;
   }
 
   .footer-left {
-    gap: 15px;
+    gap: 20px;
   }
 
   .footer-right {
@@ -219,91 +222,27 @@
 
   .footer-left span,
   .footer-right a {
-    font-size: 15px;
-  }
-
-  .social-icons a {
-    font-size: 18px;
-  }
-
-  .theme-toggle {
-    font-size: 18px;
-  }
-
-  .theme-toggle i {
-    font-size: 18px;
-  }
-}
-
-/* Tablets (max-width: 1024px) */
-@media (max-width: 1024px) {
-  .sidebar {
-    width: 220px;
-  }
-
-  .main-content {
-    margin-left: 220px;
-    padding: 25px;
-    padding-top: 50px;
-  }
-
-  .footer {
-    margin-left: 220px;
-    padding: 5px 25px;
-    width: calc(100% - 220px);
-  }
-
-  .logo-text {
-    font-size: 18px;
-  }
-
-  .portal-text {
-    font-size: 13px;
-  }
-
-  .team {
-    font-size: 13px;
-  }
-
-  .menu li a {
-    font-size: 15px;
-  }
-
-  .upgrade-btn {
-    padding: 9px;
-  }
-
-  .footer-left {
-    gap: 10px;
-  }
-
-  .footer-right {
-    gap: 12px;
-  }
-
-  .footer-left span,
-  .footer-right a {
-    font-size: 14px;
+    font-size: 16px;
   }
 
   .social-icons a,
   .theme-toggle {
-    font-size: 16px;
+    font-size: 18px;
   }
 
   .theme-toggle i {
-    font-size: 16px;
+    font-size: 18px;
   }
 }
 
 /* Tablets and desktops (min-width: 769px) */
 @media (min-width: 769px) {
-  .sidebar {
-    transform: none; /* Ensure sidebar is always visible */
+  .hamburger {
+    display: none;
   }
 
-  .hamburger {
-    display: none; /* Hide hamburger menu */
+  .sidebar {
+    transform: none;
   }
 
   .main-content {
@@ -316,6 +255,54 @@
   }
 }
 
+/* Tablets (1199px to 769px) */
+@media (max-width: 1199px) and (min-width: 769px) {
+  .sidebar {
+    width: 220px;
+  }
+
+  .main-content {
+    margin-left: 220px;
+  }
+
+  .footer {
+    margin-left: 220px;
+    width: calc(100% - 220px);
+    padding: 10px 10px; /* Further reduced padding */
+    gap: 8px; /* Smaller gap to fit content */
+    min-width: 0; /* Allow footer to shrink if needed */
+  }
+
+  .footer-left {
+    gap: 8px;
+    flex-wrap: nowrap;
+    flex-shrink: 1;
+    min-width: 0;
+    overflow: visible; /* Ensure content isn’t clipped */
+  }
+
+  .footer-right {
+    gap: 8px;
+    flex-wrap: wrap;
+    flex-shrink: 1;
+    min-width: 0;
+  }
+
+  .footer-left span,
+  .footer-right a {
+    font-size: 12px; /* Smaller font to fit content */
+  }
+
+  .social-icons a,
+  .theme-toggle {
+    font-size: 13px;
+  }
+
+  .theme-toggle i {
+    font-size: 13px;
+  }
+}
+
 /* Mobile devices (max-width: 768px) */
 @media (max-width: 768px) {
   .hamburger {
@@ -325,6 +312,8 @@
   .sidebar {
     transform: translateX(-100%);
     width: 200px;
+    padding: 15px;
+    z-index: 1000;
   }
 
   .sidebar.active {
@@ -333,7 +322,7 @@
 
   .main-content {
     margin-left: 0;
-    padding: 20px;
+    padding: 15px;
     padding-top: 60px;
   }
 
@@ -342,19 +331,35 @@
     width: 100%;
     flex-direction: column;
     gap: 15px;
+    padding: 15px 20px;
     text-align: center;
-    padding: 10px 20px;
   }
 
   .footer-left {
-    flex-direction: column;
-    gap: 10px;
+    flex-direction: row;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
   }
 
   .footer-right {
     flex-wrap: wrap;
     justify-content: center;
     gap: 10px;
+  }
+
+  .footer-left span,
+  .footer-right a {
+    font-size: 14px;
+  }
+
+  .social-icons a,
+  .theme-toggle {
+    font-size: 14px;
+  }
+
+  .theme-toggle i {
+    font-size: 14px;
   }
 
   .logo-text {
@@ -377,129 +382,51 @@
     font-size: 14px;
     padding: 8px;
   }
-
-  .footer-left span,
-  .footer-right a {
-    font-size: 14px;
-  }
-
-  .social-icons a,
-  .theme-toggle {
-    font-size: 14px;
-  }
-
-  .theme-toggle i {
-    font-size: 14px;
-  }
 }
 
+/* Smaller mobile devices (max-width: 480px) */
 @media (max-width: 480px) {
-  .hamburger {
-    font-size: 20px;
-    top: 15px;
-    left: 15px;
-  }
-
-  .sidebar {
-    width: 180px;
-    padding: 15px;
-  }
-
-  .main-content {
-    padding: 15px;
-    padding-top: 50px;
-  }
-
   .footer {
-    padding: 10px 15px;
+    padding: 12px 15px;
     gap: 12px;
   }
 
-  .logo-text {
-    font-size: 14px;
-  }
-
-  .portal-text {
-    font-size: 10px;
-  }
-
-  .team {
-    font-size: 10px;
-  }
-
-  .menu li a {
-    font-size: 12px;
-  }
-
-  .menu li {
-    margin: 10px 0;
-  }
-
-  .upgrade-btn {
-    font-size: 12px;
-    padding: 6px;
-  }
-
-  .footer-left span,
-  .footer-right a {
-    font-size: 12px;
-  }
-
-  .social-icons a,
-  .theme-toggle {
-    font-size: 12px;
-  }
-
-  .theme-toggle i {
-    font-size: 12px;
+  .footer-left {
+    gap: 10px;
   }
 
   .footer-right {
     gap: 8px;
   }
+
+  .footer-left span,
+  .footer-right a {
+    font-size: 12px;
+  }
+
+  .social-icons a,
+  .theme-toggle {
+    font-size: 12px;
+  }
+
+  .theme-toggle i {
+    font-size: 12px;
+  }
 }
 
+/* Very small devices (max-width: 360px) */
 @media (max-width: 360px) {
-  .hamburger {
-    font-size: 18px;
-    top: 10px;
-    left: 10px;
-  }
-
-  .sidebar {
-    width: 160px;
-    padding: 10px;
-  }
-
-  .main-content {
-    padding: 10px;
-    padding-top: 40px;
-  }
-
   .footer {
     padding: 10px 10px;
     gap: 10px;
   }
 
-  .logo-text {
-    font-size: 12px;
+  .footer-left {
+    gap: 8px;
   }
 
-  .portal-text {
-    font-size: 8px;
-  }
-
-  .team {
-    font-size: 8px;
-  }
-
-  .menu li a {
-    font-size: 10px;
-  }
-
-  .upgrade-btn {
-    font-size: 10px;
-    padding: 5px;
+  .footer-right {
+    gap: 6px;
   }
 
   .footer-left span,
@@ -514,9 +441,5 @@
 
   .theme-toggle i {
     font-size: 10px;
-  }
-
-  .footer-right {
-    gap: 6px;
   }
 }

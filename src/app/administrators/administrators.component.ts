@@ -1,16 +1,14 @@
 import { CommonModule } from '@angular/common';
-import { Component,OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-administrators',
   standalone: true,
-  imports: [FormsModule,CommonModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './administrators.component.html',
   styleUrl: './administrators.component.css'
 })
-
-
 export class AdministratorsComponent implements OnInit {
   admins: any[] = [
     { id: 1, name: 'John Doe', email: 'john.doe@example.com', role: 'Super Admin', status: 'Active' },
@@ -38,6 +36,11 @@ export class AdministratorsComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
+    // Load admins from localStorage if available
+    const savedAdmins = localStorage.getItem('admins');
+    if (savedAdmins) {
+      this.admins = JSON.parse(savedAdmins);
+    }
     this.filteredAdmins = [...this.admins];
     this.calculatePagination();
     this.updatePaginatedAdmins();
@@ -47,7 +50,6 @@ export class AdministratorsComponent implements OnInit {
   filterAdmins(): void {
     let filtered = [...this.admins];
 
-    // Apply search filter
     if (this.searchTerm) {
       const term = this.searchTerm.toLowerCase();
       filtered = filtered.filter(admin =>
@@ -57,18 +59,16 @@ export class AdministratorsComponent implements OnInit {
       );
     }
 
-    // Apply role filter
     if (this.roleFilter) {
       filtered = filtered.filter(admin => admin.role === this.roleFilter);
     }
 
-    // Apply status filter
     if (this.statusFilter) {
       filtered = filtered.filter(admin => admin.status === this.statusFilter);
     }
 
     this.filteredAdmins = filtered;
-    this.currentPage = 1; // Reset to first page on filter change
+    this.currentPage = 1;
     this.calculatePagination();
     this.updatePaginatedAdmins();
   }
@@ -106,16 +106,16 @@ export class AdministratorsComponent implements OnInit {
 
   saveAdmin(): void {
     if (this.selectedAdmin) {
-      // Edit existing admin
       const index = this.admins.findIndex(a => a.id === this.selectedAdmin.id);
       if (index !== -1) {
         this.admins[index] = { ...this.modalAdmin, id: this.selectedAdmin.id };
       }
     } else {
-      // Add new admin
       const newId = this.admins.length ? Math.max(...this.admins.map(a => a.id)) + 1 : 1;
       this.admins.push({ ...this.modalAdmin, id: newId });
     }
+    // Save to localStorage
+    localStorage.setItem('admins', JSON.stringify(this.admins));
     this.filterAdmins();
     this.closeModal();
   }
@@ -123,6 +123,8 @@ export class AdministratorsComponent implements OnInit {
   deleteAdmin(admin: any): void {
     if (confirm(`Are you sure you want to delete ${admin.name}?`)) {
       this.admins = this.admins.filter(a => a.id !== admin.id);
+      // Save to localStorage after deletion
+      localStorage.setItem('admins', JSON.stringify(this.admins));
       this.filterAdmins();
     }
   }

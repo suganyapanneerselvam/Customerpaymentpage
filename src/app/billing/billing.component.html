@@ -99,11 +99,11 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>John Doe</td>
-            <td>**** **** **** 1234</td>
-            <td>12/25</td>
-            <td><button class="remove-btn">Remove</button></td>
+          <tr *ngFor="let method of paymentMethods; let i = index">
+            <td>{{ method.cardholderName }}</td>
+            <td>{{ method.cardNumber }}</td>
+            <td>{{ method.expMonth }}/{{ method.expYear }}</td>
+            <td><button class="remove-btn" (click)="removePaymentMethod(i)">Remove</button></td>
           </tr>
         </tbody>
       </table>

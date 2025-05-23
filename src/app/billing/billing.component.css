@@ -1,6 +1,8 @@
 .billing-container {
   max-width: 1200px;
   margin: 0 auto;
+  padding: 0 15px; /* Added padding to prevent content from touching edges */
+  box-sizing: border-box;
 }
 
 h1 {
@@ -17,14 +19,17 @@ h1 {
   display: flex;
   gap: 20px;
   margin-bottom: 30px;
+  flex-wrap: wrap; /* Allow cards to wrap at smaller screens */
 }
 
 .plan-card {
   flex: 1;
+  min-width: 280px; /* Ensure cards don’t shrink too much */
   padding: 20px;
   border: 1px solid var(--border-color);
   border-radius: 5px;
   background-color: var(--card-background);
+  box-sizing: border-box;
 }
 
 .plan-card h2 {
@@ -102,6 +107,7 @@ h1 {
   max-width: 500px;
   border: 1px solid var(--border-color);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  box-sizing: border-box;
 }
 
 .payment-form-content h3 {
@@ -175,9 +181,14 @@ h1 {
   cursor: not-allowed;
 }
 
+.payment-methods {
+  overflow-x: auto; /* Allow horizontal scrolling for table on small screens */
+}
+
 .payment-methods table {
   width: 100%;
   border-collapse: collapse;
+  min-width: 600px; /* Ensure table doesn’t shrink too much */
 }
 
 .payment-methods th,
@@ -252,7 +263,8 @@ select {
 /* Media Queries for Responsiveness */
 @media (max-width: 1024px) {
   .billing-container {
-    max-width: 90%;
+    max-width: 95%; /* Adjusted to fit better on smaller screens */
+    padding: 0 10px;
   }
 
   h1 {
@@ -265,14 +277,13 @@ select {
 
   .plan-section {
     gap: 15px;
+    flex-wrap: wrap; /* Ensure cards wrap properly */
   }
 
   .plan-card {
+    flex: 1 1 45%; /* Allow two cards per row with some margin */
+    min-width: 250px; /* Adjusted for smaller screens */
     padding: 15px;
-  }
-
-  .plan-card h2 {
-    font-size: 18px;
   }
 
   .payment-section {
@@ -288,7 +299,7 @@ select {
   }
 
   .payment-form-content {
-    max-width: 450px;
+    max-width: 90%; /* Adjusted to fit better */
     padding: 25px;
   }
 
@@ -313,7 +324,8 @@ select {
 
 @media (max-width: 768px) {
   .billing-container {
-    max-width: 95%;
+    max-width: 100%;
+    padding: 0 10px;
   }
 
   h1 {
@@ -326,20 +338,14 @@ select {
   }
 
   .plan-section {
-    flex-direction: column;
+    flex-direction: column; /* Stack cards vertically */
     gap: 15px;
   }
 
   .plan-card {
+    flex: 1 1 100%; /* Full width for each card */
+    min-width: 100%; /* Ensure full width */
     padding: 15px;
-  }
-
-  .plan-card h2 {
-    font-size: 18px;
-  }
-
-  .plan-card button {
-    padding: 8px;
   }
 
   .payment-section {
@@ -357,7 +363,7 @@ select {
   }
 
   .payment-form-content {
-    max-width: 90%;
+    max-width: 95%;
     padding: 20px;
   }
 
@@ -370,7 +376,7 @@ select {
   }
 
   .form-row {
-    flex-direction: column;
+    flex-direction: column; /* Stack form inputs vertically */
     gap: 15px;
   }
 
@@ -404,6 +410,7 @@ select {
 @media (max-width: 480px) {
   .billing-container {
     max-width: 100%;
+    padding: 0 8px;
   }
 
   h1 {
@@ -499,6 +506,10 @@ select {
 }
 
 @media (max-width: 360px) {
+  .billing-container {
+    padding: 0 5px;
+  }
+
   h1 {
     font-size: 18px;
   }
