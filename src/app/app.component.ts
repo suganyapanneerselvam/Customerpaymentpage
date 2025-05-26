@@ -13,6 +13,8 @@ import { CommonModule } from '@angular/common';
 export class AppComponent implements OnInit{
    sidebarOpen: boolean = false;
      isDarkTheme:boolean = true;
+       currentYear: number = new Date().getFullYear();
+
   title = 'customer-portal';
   ngOnInit() {
     // Load theme preference from localStorage

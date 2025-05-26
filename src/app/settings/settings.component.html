@@ -1,1 +1,132 @@
-<p>settings works!</p>
+<div class="settings-container">
+  <!-- Header -->
+  <div class="settings-header">
+    <h1>Settings</h1>
+  </div>
+
+  <!-- Tabbed Navigation -->
+  <div class="settings-tabs">
+    <button
+      *ngFor="let tab of tabs"
+      [ngClass]="{'active': currentTab === tab}"
+      (click)="currentTab = tab"
+    >
+      {{ tab }}
+    </button>
+  </div>
+
+  <!-- General Settings -->
+  <div class="settings-section" *ngIf="currentTab === 'General'">
+    <h2>Team Settings</h2>
+    <div class="card">
+      <div class="form-group">
+        <label for="teamName">Team Name</label>
+        <input
+          type="text"
+          id="teamName"
+          [(ngModel)]="team.name"
+          name="teamName"
+          required
+          [ngClass]="{'light-theme': isLightTheme}"
+        />
+      </div>
+      <div class="form-group">
+        <label>Team Members</label>
+        <div class="member-list">
+          <div *ngFor="let member of team.members" class="member-item">
+            <span>{{ member.name }} ({{ member.role }})</span>
+            <button class="action-btn remove-btn" (click)="removeMember(member.id)">Remove</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Notification Settings -->
+  <div class="settings-section" *ngIf="currentTab === 'Notifications'">
+    <h2>Notification Preferences</h2>
+    <div class="card">
+      <div class="form-group checkbox-group">
+        <label>
+          <input
+            type="checkbox"
+            [(ngModel)]="notifications.email"
+            name="emailNotifications"
+          />
+          Receive Email Notifications
+        </label>
+      </div>
+      <div class="form-group checkbox-group">
+        <label>
+          <input
+            type="checkbox"
+            [(ngModel)]="notifications.sms"
+            name="smsNotifications"
+          />
+          Receive SMS Notifications
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <!-- Security Settings -->
+  <div class="settings-section" *ngIf="currentTab === 'Security'">
+    <h2>Security Settings</h2>
+    <div class="card">
+      <div class="form-group">
+        <label for="currentPassword">Current Password</label>
+        <input
+          type="password"
+          id="currentPassword"
+          [(ngModel)]="password.current"
+          name="currentPassword"
+          [required]="password.new || password.confirm"
+          [ngClass]="{'light-theme': isLightTheme}"
+        />
+      </div>
+      <div class="form-group">
+        <label for="newPassword">New Password</label>
+        <input
+          type="password"
+          id="newPassword"
+          [(ngModel)]="password.new"
+          name="newPassword"
+          [ngClass]="{'light-theme': isLightTheme}"
+        />
+      </div>
+      <div class="form-group">
+        <label for="confirmPassword">Confirm New Password</label>
+        <input
+          type="password"
+          id="confirmPassword"
+          [(ngModel)]="password.confirm"
+          name="confirmPassword"
+          [ngClass]="{'light-theme': isLightTheme}"
+        />
+      </div>
+      <div class="form-group">
+        <label>Sessions</label>
+        <button class="action-btn" (click)="logoutAllDevices()">Log Out of All Devices</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Danger Zone -->
+  <div class="settings-section danger-zone" *ngIf="currentTab === 'Danger Zone'">
+    <h2>Danger Zone</h2>
+    <div class="card danger-card">
+      <div class="form-group">
+        <label>Delete Team</label>
+        <p class="warning-text">This action cannot be undone. Deleting your team will remove all associated data.</p>
+        <button class="action-btn delete-btn" (click)="deleteTeam()">Delete Team</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Save Button -->
+  <div class="form-actions">
+    <button class="save-btn" (click)="saveSettings()" [disabled]="password.new !== password.confirm">
+      Save Changes
+    </button>
+  </div>
+</div>

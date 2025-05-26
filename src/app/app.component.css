@@ -122,7 +122,7 @@
   z-index: 1100;
 }
 
-/* Updated footer styles */
+/* Footer styles */
 .footer {
   display: flex;
   justify-content: space-between;
@@ -135,11 +135,12 @@
   box-sizing: border-box;
   flex-wrap: wrap;
   gap: 15px;
-  z-index: 999; /* Ensure footer is below sidebar but above other content */
+  z-index: 999;
 }
 
 .footer-left {
   display: flex;
+
   align-items: center;
   gap: 15px;
   flex-shrink: 1;
@@ -147,15 +148,14 @@
 }
 
 .footer-left span {
+  
   font-size: 14px;
   color: var(--secondary-text-color);
   line-height: 1;
   white-space: nowrap;
 }
 
-.status {
-  color: #00ff00;
-}
+
 
 .social-icons {
   display: flex;
@@ -255,8 +255,8 @@
   }
 }
 
-/* Tablets (1199px to 769px) */
-@media (max-width: 1199px) and (min-width: 769px) {
+/* Tablets (1199px to 800px) */
+@media (max-width: 1199px) and (min-width: 800px) {
   .sidebar {
     width: 220px;
   }
@@ -268,18 +268,67 @@
   .footer {
     margin-left: 220px;
     width: calc(100% - 220px);
-    padding: 10px 10px; /* Further reduced padding */
-    gap: 8px; /* Smaller gap to fit content */
-    min-width: 0; /* Allow footer to shrink if needed */
+    padding: 10px 15px;
+    gap: 10px;
+    min-width: 0;
+  }
+
+  .footer-left {
+    gap: 10px;
+    flex-wrap: wrap; /* Allow wrapping to prevent overflow */
+    flex-shrink: 1;
+    min-width: 0;
+    overflow: visible;
+  }
+
+  .footer-right {
+    gap: 10px;
+    flex-wrap: wrap;
+    flex-shrink: 1;
+    min-width: 0;
+  }
+
+  .footer-left span,
+  .footer-right a {
+    font-size: 13px;
+  }
+
+  .social-icons a,
+  .theme-toggle {
+    font-size: 14px;
+  }
+
+  .theme-toggle i {
+    font-size: 14px;
+  }
+}
+
+/* Transitional range (799px to 769px) */
+@media (max-width: 799px) and (min-width: 769px) {
+  .sidebar {
+    width: 220px;
+  }
+
+  .main-content {
+    margin-left: 220px;
+  }
+
+  .footer {
+    margin-left: 220px;
+    width: calc(100% - 220px);
+    padding: 10px 10px;
+    gap: 8px;
+    min-width: 0;
   }
 
   .footer-left {
     gap: 8px;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     flex-shrink: 1;
     min-width: 0;
-    overflow: visible; /* Ensure content isn’t clipped */
+    overflow: visible;
   }
+  
 
   .footer-right {
     gap: 8px;
@@ -290,7 +339,7 @@
 
   .footer-left span,
   .footer-right a {
-    font-size: 12px; /* Smaller font to fit content */
+    font-size: 12px;
   }
 
   .social-icons a,
@@ -443,3 +492,4 @@
     font-size: 10px;
   }
 }
+
