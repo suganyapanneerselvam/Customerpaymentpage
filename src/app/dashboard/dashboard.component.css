@@ -1,33 +1,40 @@
+/* Ensure box-sizing is applied globally within the component */
+.dashboard-container * {
+  box-sizing: border-box;
+}
+
 .dashboard-container {
   padding: 20px;
   color: var(--text-color);
   background-color: var(--background-color);
   box-sizing: border-box;
-  height: calc(100vh - 120px);
+  height: auto; /* Allow natural height */
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  overflow: hidden; /* Prevent internal scrollbar */
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
 }
 
 .welcome {
   font-size: 28px;
   font-weight: bold;
   margin-bottom: 8px;
-  flex-shrink: 0;
+  flex-shrink: 0; /* Prevent shrinking */
 }
 
 .subtitle {
   color: var(--secondary-text-color);
   margin-bottom: 20px;
   font-size: 16px;
-  flex-shrink: 0;
+  flex-shrink: 0; /* Prevent shrinking */
 }
 
 .setup-grid {
   display: flex;
   gap: 20px;
   flex: 1;
-  min-height: 0;
+  min-height: 0; /* Allow shrinking */
+  overflow: hidden; /* Prevent scrollbar in grid */
 }
 
 .setup-column {
@@ -36,7 +43,9 @@
   padding: 20px;
   border-radius: 8px;
   border: 1px solid var(--border-color);
-  overflow-y: auto;
+  overflow: hidden; /* Prevent internal scrollbar */
+  display: flex;
+  flex-direction: column;
 }
 
 .support-column {
@@ -47,19 +56,21 @@
   border: 1px solid var(--border-color);
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  overflow: hidden; /* Prevent internal scrollbar */
 }
 
 .support-column h2 {
   color: var(--text-color);
   font-size: 20px;
   margin-bottom: 15px;
+  flex-shrink: 0; /* Prevent shrinking */
 }
 
 .support-links {
   list-style: none;
   padding: 0;
   flex: 1;
+  overflow: hidden; /* Prevent scrollbar in links */
 }
 
 .support-links li {

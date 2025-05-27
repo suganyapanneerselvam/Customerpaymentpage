@@ -3,9 +3,10 @@
   color: var(--text-color);
   background-color: var(--background-color);
   box-sizing: border-box;
-  min-height: calc(100vh - 120px);
+  height: auto; /* Changed to auto to prevent forced scrolling */
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
 .instances-title {
@@ -37,6 +38,7 @@
   gap: 20px;
   flex: 1;
   min-height: 0;
+  overflow: visible; /* Ensure no scrollbar */
 }
 
 .instance-card, .create-instance-section {

@@ -54,8 +54,11 @@
     <button class="upgrade-btn">UPGRADE TO PRO 🌟</button>
   </div>
 
+  <!-- Backdrop for Mobile Sidebar -->
+  <div class="sidebar-backdrop d-lg-none" [ngClass]="{'active': sidebarOpen}" (click)="toggleSidebar()"></div>
+
   <!-- Main Content -->
-  <div class="main-content">
+  <div class="main-content" [ngClass]="{'sidebar-open': sidebarOpen}">
     <router-outlet></router-outlet>
   </div>
 

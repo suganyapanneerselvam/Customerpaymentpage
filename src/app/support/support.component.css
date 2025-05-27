@@ -3,12 +3,13 @@
   color: var(--text-color);
   background-color: var(--background-color);
   box-sizing: border-box;
-  min-height: calc(100vh - 120px);
+  height: auto; /* Changed to auto to prevent forced scrolling */
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
   width: 100%;
+  overflow: hidden;
 }
 
 .support-title {
@@ -32,6 +33,7 @@
   max-width: 600px;
   display: flex;
   flex-direction: column;
+  overflow: visible; /* Ensure no scrollbar */
 }
 
 .card-title {
@@ -95,7 +97,7 @@
 @media (max-width: 925px) {
   .support-container {
     padding: 15px 10px;
-    min-height: calc(100vh - 130px);
+    height: auto; /* Ensure natural height */
   }
 
   .support-card {
@@ -130,7 +132,7 @@
 @media (max-width: 768px) {
   .support-container {
     padding: 15px 10px;
-    min-height: calc(100vh - 150px); /* Adjusted for hamburger menu */
+    height: auto; /* Ensure natural height */
     align-items: center;
     justify-content: flex-start;
   }
