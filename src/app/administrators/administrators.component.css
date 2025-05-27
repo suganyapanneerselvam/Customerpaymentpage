@@ -45,31 +45,37 @@
 
 .search-bar {
   flex: 1 1 300px;
-  position: relative;
   min-width: 200px;
+  max-width: 400px;
+  display: flex; /* Use flexbox for search bar */
+  align-items: center; /* Vertically center input and icon */
+  border: 1px solid var(--input-border); /* Border around the entire search bar */
+  border-radius: 5px;
+  background-color: var(--input-background);
+  height: 40px; /* Fixed height for consistency */
 }
 
 .search-bar input {
-  width: 100%;
-  padding: 10px 40px 10px 15px;
-  border: 1px solid var(--input-border);
-  border-radius: 5px;
-  background-color: var(--input-background);
+  flex: 1; /* Input takes remaining space */
+  border: none; /* Remove input border since the parent has one */
+  padding: 10px 10px 10px 15px; /* Adjusted padding to make space for icon */
+  background: transparent; /* Transparent background to match parent */
   color: var(--text-color);
   font-size: 16px;
+  height: 100%; /* Match parent height */
+  line-height: 1.5;
 }
 
 .search-bar input:focus {
   outline: none;
-  border-color: var(--button-background);
 }
 
 .search-icon {
-  position: absolute;
-  right: 15px;
-  top: 50%;
-  transform: translateY(-50%);
+  padding: 0 15px; /* Space around the icon */
   color: var(--secondary-text-color);
+  font-size: 16px;
+  display: flex;
+  align-items: center;
 }
 
 .filter-bar {
@@ -87,8 +93,8 @@
   background-color: var(--input-background);
   color: var(--text-color);
   font-size: 16px;
-  width: auto; /* Allow dropdowns to size based on content by default */
-  min-width: 150px; /* Ensure a minimum width */
+  width: auto;
+  min-width: 150px;
 }
 
 .filter-bar select:focus {
@@ -347,13 +353,29 @@
 
 .filter-bar select.light-theme,
 .form-group input.light-theme,
-.form-group select.light-theme {
+.form-group select.light-theme,
+.search-bar input.light-theme {
   background-color: var(--input-background);
-  border-color: var(--input-border);
   color: var(--text-color);
 }
 
 /* Responsive Design */
+@media (max-width: 1024px) and (min-width: 768px) {
+  .search-bar {
+    max-width: 350px;
+    height: 38px;
+  }
+
+  .search-bar input {
+    font-size: 15px;
+  }
+
+  .search-icon {
+    font-size: 15px;
+    padding: 0 12px;
+  }
+}
+
 @media (max-width: 767px) {
   .admin-header {
     flex-direction: column;
@@ -376,32 +398,34 @@
   }
 
   .search-bar {
-    flex: 1 1 100%; /* Full width */
-    min-width: 0; /* Allow shrinking */
+    flex: 1 1 100%;
+    min-width: 0;
+    max-width: none;
+    height: 36px;
   }
 
   .search-bar input {
-    padding: 8px 35px 8px 12px;
+    padding: 8px 10px 8px 12px;
     font-size: 14px;
   }
 
   .search-icon {
-    right: 12px;
+    padding: 0 12px;
     font-size: 14px;
   }
 
   .filter-bar {
-    flex-direction: column; /* Stack dropdowns vertically */
+    flex-direction: column;
     align-items: stretch;
-    gap: 8px; /* Reduced gap for better spacing */
-    flex: 1 1 100%; /* Full width */
+    gap: 8px;
+    flex: 1 1 100%;
   }
 
   .filter-bar select {
-    width: 100%; /* Full width for each dropdown */
+    width: 100%;
     padding: 8px;
     font-size: 14px;
-    min-width: 0; /* Allow shrinking */
+    min-width: 0;
   }
 
   .admin-table th,
@@ -467,13 +491,17 @@
     font-size: 12px;
   }
 
+  .search-bar {
+    height: 34px;
+  }
+
   .search-bar input {
-    padding: 6px 30px 6px 10px;
+    padding: 6px 10px 6px 10px;
     font-size: 12px;
   }
 
   .search-icon {
-    right: 10px;
+    padding: 0 10px;
     font-size: 12px;
   }
 

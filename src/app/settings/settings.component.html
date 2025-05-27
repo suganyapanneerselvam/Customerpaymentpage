@@ -18,7 +18,7 @@
   <!-- General Settings -->
   <div class="settings-section" *ngIf="currentTab === 'General'">
     <h2>Team Settings</h2>
-    <div class="card">
+    <div class="card" [ngClass]="{'light-theme': isLightTheme}">
       <div class="form-group">
         <label for="teamName">Team Name</label>
         <input
@@ -45,7 +45,7 @@
   <!-- Notification Settings -->
   <div class="settings-section" *ngIf="currentTab === 'Notifications'">
     <h2>Notification Preferences</h2>
-    <div class="card">
+    <div class="card" [ngClass]="{'light-theme': isLightTheme}">
       <div class="form-group checkbox-group">
         <label>
           <input
@@ -72,7 +72,7 @@
   <!-- Security Settings -->
   <div class="settings-section" *ngIf="currentTab === 'Security'">
     <h2>Security Settings</h2>
-    <div class="card">
+    <div class="card" [ngClass]="{'light-theme': isLightTheme}">
       <div class="form-group">
         <label for="currentPassword">Current Password</label>
         <input
@@ -114,7 +114,7 @@
   <!-- Danger Zone -->
   <div class="settings-section danger-zone" *ngIf="currentTab === 'Danger Zone'">
     <h2>Danger Zone</h2>
-    <div class="card danger-card">
+    <div class="card danger-card" [ngClass]="{'light-theme': isLightTheme}">
       <div class="form-group">
         <label>Delete Team</label>
         <p class="warning-text">This action cannot be undone. Deleting your team will remove all associated data.</p>
