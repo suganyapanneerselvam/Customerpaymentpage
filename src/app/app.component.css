@@ -6,9 +6,11 @@
   --border-color: #333;
   --card-background: #252b3b;
   --button-background: #ff007a;
+  --button-hover-background: #e6006e;
   --input-background: #333;
   --input-border: #444;
   --table-header-background: #333;
+  --hover-background: rgba(255, 255, 255, 0.1);
   overflow-x: hidden;
 }
 
@@ -19,9 +21,11 @@
   --border-color: #ddd;
   --card-background: #fff;
   --button-background: #ff007a;
+  --button-hover-background: #e6006e;
   --input-background: #fff;
   --input-border: #ccc;
   --table-header-background: #e0e0e0;
+  --hover-background: rgba(0, 0, 0, 0.05);
 }
 
 .app-container {
@@ -84,10 +88,26 @@
   color: var(--secondary-text-color);
   text-decoration: none;
   font-size: 16px;
+  display: flex;
+  align-items: center;
+  padding: 8px 10px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.menu li.active a {
+.menu li a:hover {
+  background-color: var(--hover-background);
   color: var(--text-color);
+}
+
+.menu li a.active {
+  color: var(--text-color);
+  font-weight: bold;
+  background-color: var(--hover-background);
+}
+
+.menu li a i {
+  font-size: 16px;
 }
 
 .upgrade-btn {
@@ -101,6 +121,11 @@
   cursor: pointer;
   border-radius: 5px;
   text-transform: uppercase;
+  transition: background-color 0.3s ease;
+}
+
+.upgrade-btn:hover {
+  background-color: var(--button-hover-background);
 }
 
 .main-content {
@@ -140,7 +165,6 @@
 
 .footer-left {
   display: flex;
-
   align-items: center;
   gap: 15px;
   flex-shrink: 1;
@@ -148,14 +172,11 @@
 }
 
 .footer-left span {
-  
   font-size: 14px;
   color: var(--secondary-text-color);
   line-height: 1;
   white-space: nowrap;
 }
-
-
 
 .social-icons {
   display: flex;
@@ -235,8 +256,8 @@
   }
 }
 
-/* Tablets and desktops (min-width: 769px) */
-@media (min-width: 769px) {
+/* Tablets and desktops (min-width: 992px, Bootstrap's lg breakpoint) */
+@media (min-width: 992px) {
   .hamburger {
     display: none;
   }
@@ -255,8 +276,8 @@
   }
 }
 
-/* Tablets (1199px to 800px) */
-@media (max-width: 1199px) and (min-width: 800px) {
+/* Tablets (991px to 768px, between Bootstrap's md and lg) */
+@media (max-width: 991px) and (min-width: 768px) {
   .sidebar {
     width: 220px;
   }
@@ -275,7 +296,7 @@
 
   .footer-left {
     gap: 10px;
-    flex-wrap: wrap; /* Allow wrapping to prevent overflow */
+    flex-wrap: wrap;
     flex-shrink: 1;
     min-width: 0;
     overflow: visible;
@@ -303,57 +324,8 @@
   }
 }
 
-/* Transitional range (799px to 769px) */
-@media (max-width: 799px) and (min-width: 769px) {
-  .sidebar {
-    width: 220px;
-  }
-
-  .main-content {
-    margin-left: 220px;
-  }
-
-  .footer {
-    margin-left: 220px;
-    width: calc(100% - 220px);
-    padding: 10px 10px;
-    gap: 8px;
-    min-width: 0;
-  }
-
-  .footer-left {
-    gap: 8px;
-    flex-wrap: wrap;
-    flex-shrink: 1;
-    min-width: 0;
-    overflow: visible;
-  }
-  
-
-  .footer-right {
-    gap: 8px;
-    flex-wrap: wrap;
-    flex-shrink: 1;
-    min-width: 0;
-  }
-
-  .footer-left span,
-  .footer-right a {
-    font-size: 12px;
-  }
-
-  .social-icons a,
-  .theme-toggle {
-    font-size: 13px;
-  }
-
-  .theme-toggle i {
-    font-size: 13px;
-  }
-}
-
-/* Mobile devices (max-width: 768px) */
-@media (max-width: 768px) {
+/* Mobile devices (max-width: 767px, Bootstrap's md breakpoint) */
+@media (max-width: 767px) {
   .hamburger {
     display: block;
   }
@@ -427,6 +399,10 @@
     font-size: 14px;
   }
 
+  .menu li a i {
+    font-size: 14px;
+  }
+
   .upgrade-btn {
     font-size: 14px;
     padding: 8px;
@@ -492,4 +468,3 @@
     font-size: 10px;
   }
 }
-
