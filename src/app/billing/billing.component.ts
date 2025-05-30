@@ -16,6 +16,20 @@ export class BillingComponent {
   paymentMethods: { cardholderName: string, cardNumber: string, expMonth: string, expYear: string, cvv: string }[] = [
     { cardholderName: 'suganya panneerselvam', cardNumber: '**** **** **** 1234', expMonth: '12', expYear: '25', cvv: '123' }
   ];
+  countries: string[] = ['United States', 'India', 'United Kingdom', 'Canada', 'Australia']; // Add more as needed
+  invoiceDetails = {
+    invoiceName: 'CODING CRISP',
+    invoiceCountry: '',
+    invoiceEmail: 'suganyap26@gmail.com',
+    invoiceAddress1: '',
+    invoiceAddress2: '',
+    invoicePostcode: '',
+    invoiceCity: ''
+  };
+  taxDetails = {
+    taxType: 'VAT',
+    taxId: ''
+  };
 
   togglePaymentForm() {
     this.showPaymentForm = !this.showPaymentForm;
@@ -37,5 +51,29 @@ export class BillingComponent {
 
   removePaymentMethod(index: number) {
     this.paymentMethods.splice(index, 1);
+  }
+
+  saveInvoiceDetails(formData: any) {
+    this.invoiceDetails = { ...formData };
+    console.log('Invoice details saved:', this.invoiceDetails);
+    alert('Invoice details saved successfully!');
+  }
+
+  resetInvoiceForm() {
+    this.invoiceDetails = {
+      invoiceName: 'CODING CRISP',
+      invoiceCountry: '',
+      invoiceEmail: 'suganyap26@gmail.com',
+      invoiceAddress1: '',
+      invoiceAddress2: '',
+      invoicePostcode: '',
+      invoiceCity: ''
+    };
+  }
+
+  saveTaxDetails(formData: any) {
+    this.taxDetails = { ...formData };
+    console.log('Tax details saved:', this.taxDetails);
+    alert('Tax details saved successfully!');
   }
 }

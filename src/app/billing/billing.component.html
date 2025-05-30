@@ -1,34 +1,38 @@
 <div class="billing-container">
   <h1>Billing</h1>
-  <p class="subtitle">Manage your subscription and payment methods</p>
+  <p class="subtitle">Manage your team billing information and invoices</p>
 
   <!-- Plan Section -->
   <div class="plan-section">
     <div class="plan-card">
-      <h2>Basic Plan</h2>
-      <p>$10/month</p>
+      <h2>Your Team is on the FREE plan</h2>
       <ul>
-        <li>1 Instance</li>
-        <li>Basic Support</li>
-        <li>5GB Storage</li>
+        <li><i class="fas fa-check"></i> All security features</li>
+        <li><i class="fas fa-check"></i> Store unlimited users</li>
+        <li><i class="fas fa-check"></i> Manage unlimited organizations</li>
+        <li><i class="fas fa-check"></i> 100 Daily Active Users</li>
+        <li><i class="fas fa-check"></i> 3 individuals</li>
+        <li><i class="fas fa-check"></i> Community support</li>
       </ul>
-      <button>Current Plan</button>
     </div>
-    <div class="plan-card">
-      <h2>Pro Plan</h2>
-      <p>$30/month</p>
+    <div class="plan-card upgrade-card">
+      <h2>Upgrade to the PRO plan to add:</h2>
       <ul>
-        <li>5 Instances</li>
-        <li>Priority Support</li>
-        <li>50GB Storage</li>
+        <li><i class="fas fa-star"></i> Multiple instances for added flexibility</li>
+        <li><i class="fas fa-star"></i> Custom domains for your instances</li>
+        <li><i class="fas fa-star"></i> Enhanced usage information</li>
+        <li><i class="fas fa-star"></i> Up to 3 administrators for your team</li>
+        <li><i class="fas fa-star"></i> Data regions that best meet performance and compliance requirements</li>
+        <li><i class="fas fa-star"></i> Extra support for your application and SLA</li>
+        <li><i class="fas fa-star"></i> Unlimited daily active users with our pay-per-use model</li>
       </ul>
-      <button>Upgrade</button>
+      <button class="upgrade-btn">Upgrade to PRO</button>
     </div>
   </div>
 
-  <!-- Payment Section -->
+  <!-- Payment Details Section -->
   <div class="payment-section">
-    <h2>Payment Methods</h2>
+    <h2>Payment Details</h2>
     <button class="add-payment-btn" (click)="togglePaymentForm()">+ Add Payment Method</button>
 
     <!-- Add Payment Form -->
@@ -107,6 +111,74 @@
           </tr>
         </tbody>
       </table>
+    </div>
+
+    <!-- Invoice Address Form -->
+    <div class="invoice-address">
+      <p class="subtitle">If you'd like to add a postal address to every invoice, enter it here.</p>
+      <form #invoiceForm="ngForm" (ngSubmit)="saveInvoiceDetails(invoiceForm.value)">
+        <div class="form-group">
+          <label for="invoice-name">Name *</label>
+          <input type="text" id="invoice-name" name="invoiceName" [(ngModel)]="invoiceDetails.invoiceName" required />
+        </div>
+        <div class="form-group">
+          <label for="invoice-country">Country *</label>
+          <select id="invoice-country" name="invoiceCountry" [(ngModel)]="invoiceDetails.invoiceCountry" required>
+            <option value="" disabled>Select a country</option>
+            <option *ngFor="let country of countries" [value]="country">{{ country }}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="invoice-email">Email *</label>
+          <input type="email" id="invoice-email" name="invoiceEmail" [(ngModel)]="invoiceDetails.invoiceEmail" required />
+        </div>
+        <div class="form-group">
+          <label for="invoice-address1">Address line 1</label>
+          <input type="text" id="invoice-address1" name="invoiceAddress1" [(ngModel)]="invoiceDetails.invoiceAddress1" />
+        </div>
+        <div class="form-group">
+          <label for="invoice-address2">Address line 2</label>
+          <input type="text" id="invoice-address2" name="invoiceAddress2" [(ngModel)]="invoiceDetails.invoiceAddress2" />
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="invoice-postcode">Post Code</label>
+            <input type="text" id="invoice-postcode" name="invoicePostcode" [(ngModel)]="invoiceDetails.invoicePostcode" />
+          </div>
+          <div class="form-group">
+            <label for="invoice-city">City</label>
+            <input type="text" id="invoice-city" name="invoiceCity" [(ngModel)]="invoiceDetails.invoiceCity" />
+          </div>
+        </div>
+        <div class="form-actions">
+          <button type="button" class="cancel-btn" (click)="resetInvoiceForm()">Change</button>
+          <button type="submit" class="save-btn" [disabled]="!invoiceForm.valid">Save</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Tax ID Section -->
+    <div class="tax-id">
+      <p class="subtitle">If you would like your invoice to render a specific TAX ID, enter it here.</p>
+      <form #taxForm="ngForm" (ngSubmit)="saveTaxDetails(taxForm.value)">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="tax-type">Type</label>
+            <select id="tax-type" name="taxType" [(ngModel)]="taxDetails.taxType">
+              <option value="VAT">VAT</option>
+              <option value="GST">GST</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="tax-id">Tax ID</label>
+            <input type="text" id="tax-id" name="taxId" [(ngModel)]="taxDetails.taxId" />
+          </div>
+        </div>
+        <p class="note">Countries that do not use TAX IDs are not listed.</p>
+        <div class="form-actions">
+          <button type="submit" class="save-btn">Save</button>
+        </div>
+      </form>
     </div>
   </div>
 </div>
